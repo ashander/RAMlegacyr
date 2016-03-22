@@ -1,0 +1,377 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<database name="srdb" schema="srdb" type="PostgreSQL - 8.4.6">
+   <tables>
+      <table name="area" numRows="230" remarks="Stock areas, used in the definition of stocks." schema="srdb" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="country" nullable="true" remarks="" size="50" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="1" name="areatype" nullable="true" remarks="" size="40" type="varchar">
+            <parent column="mgmt" foreignKey="area_areatype_fkey" implied="false" onDeleteCascade="false" table="management"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="2" name="areacode" nullable="true" remarks="" size="50" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="3" name="areaname" nullable="true" remarks="" size="100" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="4" name="alternateareaname" nullable="true" remarks="" size="50" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="5" name="areaid" nullable="false" remarks="" size="70" type="varchar">
+            <child column="areaid" foreignKey="stock_areaid_fkey" implied="false" onDeleteCascade="false" table="stock"/>
+         </column>
+         <primaryKey column="areaid" sequenceNumberInPK="1"/>
+         <index name="area_pkey" unique="true">
+            <column ascending="true" name="areaid"/>
+         </index>
+      </table>
+      <table name="assessment" numRows="361" remarks="Assesment-level details, defines ASSESSID." schema="srdb" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="assessid" nullable="false" remarks="" size="200" type="varchar">
+            <child column="assessid" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" table="bioparams"/>
+            <child column="assessid" foreignKey="brptots_assessid_fkey" implied="false" onDeleteCascade="false" table="brptots"/>
+            <child column="assessid" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" table="mostrecent"/>
+            <child column="assessid" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" table="reference_point_units_view"/>
+            <child column="assessid" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" table="reference_point_values_view"/>
+            <child column="assessid" foreignKey="referencedoc_assessid_fkey" implied="false" onDeleteCascade="false" table="referencedoc"/>
+            <child column="assessid" foreignKey="timeseries_assessid_fkey" implied="false" onDeleteCascade="false" table="timeseries"/>
+            <child column="assessid" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" table="timeseries_units_view"/>
+            <child column="assessid" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" table="timeseries_values_view"/>
+            <child column="assessid" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" table="tsrelative_explicit_view"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="assessorid" nullable="true" remarks="" size="40" type="varchar">
+            <parent column="assessorid" foreignKey="assessment_assessorid_fkey" implied="false" onDeleteCascade="false" table="assessor"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="2" name="stockid" nullable="true" remarks="" size="40" type="varchar">
+            <parent column="stockid" foreignKey="assessment_stockid_fkey" implied="false" onDeleteCascade="false" table="stock"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="3" name="recorder" nullable="true" remarks="" size="40" type="varchar">
+            <parent column="nameinxls" foreignKey="assessment_recorder_fkey" implied="false" onDeleteCascade="false" table="recorder"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="4" name="daterecorded" nullable="true" remarks="" size="13" type="date"/>
+         <column autoUpdated="false" digits="0" id="5" name="dateloaded" nullable="true" remarks="" size="13" type="date"/>
+         <column autoUpdated="false" digits="0" id="6" name="assessyear" nullable="true" remarks="" size="9" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="7" name="assesssource" nullable="true" remarks="" size="1000" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="8" name="contacts" nullable="true" remarks="" size="300" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="9" name="notes" nullable="true" remarks="" size="1000" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="10" name="pdffile" nullable="true" remarks="" size="300" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="11" name="assess" nullable="true" remarks="" size="10" type="int4"/>
+         <column autoUpdated="false" digits="0" id="12" name="refpoints" nullable="true" remarks="" size="10" type="int4"/>
+         <column autoUpdated="false" digits="0" id="13" name="assessmethod" nullable="true" remarks="" size="200" type="varchar">
+            <parent column="methodshort" foreignKey="assessment_assessmethod_fkey" implied="false" onDeleteCascade="false" table="assessmethod"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="14" name="assesscomments" nullable="true" remarks="" size="1000" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="15" name="xlsfilename" nullable="true" remarks="" size="100" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="16" name="mostrecent" nullable="true" remarks="" size="3" type="varchar"/>
+         <primaryKey column="assessid" sequenceNumberInPK="1"/>
+         <index name="assessment_pkey" unique="true">
+            <column ascending="true" name="assessid"/>
+         </index>
+         <index name="assessment_index_assessid" unique="false">
+            <column ascending="true" name="assessid"/>
+         </index>
+      </table>
+      <table name="assessmethod" numRows="53" remarks="Details of assessment methods." schema="srdb" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="category" nullable="true" remarks="" size="100" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="1" name="methodshort" nullable="false" remarks="" size="20" type="varchar">
+            <child column="assessmethod" foreignKey="assessment_assessmethod_fkey" implied="false" onDeleteCascade="false" table="assessment"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="2" name="methodlong" nullable="true" remarks="" size="200" type="varchar"/>
+         <primaryKey column="methodshort" sequenceNumberInPK="1"/>
+         <index name="assessmethod_pkey" unique="true">
+            <column ascending="true" name="methodshort"/>
+         </index>
+      </table>
+      <table name="assessor" numRows="59" remarks="Details of assessors. An assessor must be associated with a management boby from the table srdb.management." schema="srdb" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="assessorid" nullable="false" remarks="" size="40" type="varchar">
+            <child column="assessorid" foreignKey="assessment_assessorid_fkey" implied="false" onDeleteCascade="false" table="assessment"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="mgmt" nullable="true" remarks="" size="40" type="varchar">
+            <parent column="mgmt" foreignKey="assessor_mgmt_fkey" implied="false" onDeleteCascade="false" table="management"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="2" name="country" nullable="true" remarks="" size="50" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="3" name="assessorfull" nullable="true" remarks="" size="200" type="varchar"/>
+         <primaryKey column="assessorid" sequenceNumberInPK="1"/>
+         <index name="assessor_pkey" unique="true">
+            <column ascending="true" name="assessorid"/>
+         </index>
+      </table>
+      <table name="biometrics" numRows="176" remarks="Definition of point metrics such as reference points, life-history parameters and description of timeseries (e.g. age of recruitment, ages used in F calculations, etc.)." schema="srdb" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="category" nullable="true" remarks="" size="100" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="1" name="subcategory" nullable="true" remarks="" size="100" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="2" name="bioshort" nullable="true" remarks="" size="40" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="3" name="biolong" nullable="true" remarks="" size="300" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="4" name="biounitsshort" nullable="true" remarks="" size="40" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="5" name="biounitslong" nullable="true" remarks="" size="200" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="6" name="biounique" nullable="false" remarks="" size="70" type="varchar">
+            <child column="bioid" foreignKey="bioparams_bioid_fkey" implied="false" onDeleteCascade="false" table="bioparams"/>
+            <child column="bioid" foreignKey="brptots_bioid_fkey" implied="false" onDeleteCascade="false" table="brptots"/>
+         </column>
+         <primaryKey column="biounique" sequenceNumberInPK="1"/>
+         <index name="biometrics_pkey" unique="true">
+            <column ascending="true" name="biounique"/>
+         </index>
+      </table>
+      <table name="bioparams" numRows="4676" remarks="Values of point metrics." schema="srdb" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="assessid" nullable="true" remarks="" size="200" type="varchar">
+            <parent column="assessid" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" table="assessment"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="bioid" nullable="true" remarks="" size="40" type="varchar">
+            <parent column="biounique" foreignKey="bioparams_bioid_fkey" implied="false" onDeleteCascade="false" table="biometrics"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="2" name="biovalue" nullable="true" remarks="" size="200" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="3" name="bioyear" nullable="true" remarks="" size="15" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="4" name="bionotes" nullable="true" remarks="" size="1000" type="varchar"/>
+      </table>
+      <table name="brptots" numRows="661" remarks="" schema="srdb" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="assessid" nullable="true" remarks="" size="200" type="varchar">
+            <parent column="assessid" foreignKey="brptots_assessid_fkey" implied="false" onDeleteCascade="false" table="assessment"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="bioid" nullable="true" remarks="" size="70" type="varchar">
+            <parent column="biounique" foreignKey="brptots_bioid_fkey" implied="false" onDeleteCascade="false" table="biometrics"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="2" name="tsid" nullable="true" remarks="" size="40" type="varchar">
+            <parent column="tsunique" foreignKey="brptots_tsid_fkey" implied="false" onDeleteCascade="false" table="tsmetrics"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="3" name="brptotsunique" nullable="false" remarks="" size="300" type="varchar"/>
+         <primaryKey column="brptotsunique" sequenceNumberInPK="1"/>
+         <index name="brptots_pkey" unique="true">
+            <column ascending="true" name="brptotsunique"/>
+         </index>
+      </table>
+      <table name="fishbasesaupcodes" numRows="279" remarks="" schema="srdb" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="taxonkey" nullable="true" remarks="" size="10" type="int4"/>
+         <column autoUpdated="false" digits="0" id="1" name="specode" nullable="true" remarks="" size="10" type="int4"/>
+         <column autoUpdated="false" digits="0" id="2" name="taxonnom_taxonname" nullable="true" remarks="" size="200" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="3" name="commonname" nullable="true" remarks="" size="100" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="4" name="scientificname" nullable="true" remarks="" size="200" type="varchar">
+            <parent column="scientificname" foreignKey="fishbasesaupcodes_scientificname_fkey" implied="false" onDeleteCascade="false" table="taxonomy"/>
+         </column>
+      </table>
+      <table name="lmerefs" numRows="69" remarks="" schema="srdb" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="lme_number" nullable="false" remarks="" size="10" type="int4">
+            <child column="lme_number" foreignKey="lmetostocks_lme_number_fkey" implied="false" onDeleteCascade="false" table="lmetostocks"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="lme_name" nullable="true" remarks="" size="70" type="varchar"/>
+         <primaryKey column="lme_number" sequenceNumberInPK="1"/>
+         <index name="lmerefs_pkey" unique="true">
+            <column ascending="true" name="lme_number"/>
+         </index>
+      </table>
+      <table name="lmetostocks" numRows="456" remarks="" schema="srdb" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="stockid" nullable="true" remarks="" size="40" type="varchar">
+            <parent column="stockid" foreignKey="lmetostocks_stockid_fkey" implied="false" onDeleteCascade="false" table="stock"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="lme_number" nullable="true" remarks="" size="10" type="int4">
+            <parent column="lme_number" foreignKey="lmetostocks_lme_number_fkey" implied="false" onDeleteCascade="false" table="lmerefs"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="2" name="stocktolmerelation" nullable="true" remarks="" size="10" type="varchar"/>
+      </table>
+      <table name="management" numRows="26" remarks="Management bodies, used in the definition of stock areas and stock assessors." schema="srdb" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="mgmt" nullable="false" remarks="" size="40" type="varchar">
+            <child column="areatype" foreignKey="area_areatype_fkey" implied="false" onDeleteCascade="false" table="area"/>
+            <child column="mgmt" foreignKey="assessor_mgmt_fkey" implied="false" onDeleteCascade="false" table="assessor"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="country" nullable="true" remarks="" size="50" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="2" name="managementauthority" nullable="true" remarks="" size="200" type="varchar"/>
+         <primaryKey column="mgmt" sequenceNumberInPK="1"/>
+         <index name="management_pkey" unique="true">
+            <column ascending="true" name="mgmt"/>
+         </index>
+      </table>
+      <table name="mostrecent" numRows="360" remarks="Table with information about which assessment is the most recent, what it updates, whether it is a duplicate, etc.." schema="srdb" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="stockid" nullable="true" remarks="" size="40" type="varchar">
+            <parent column="stockid" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" table="stock"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="assessid" nullable="true" remarks="" size="200" type="varchar">
+            <parent column="assessid" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" table="assessment"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="2" name="ismostrecent" nullable="true" remarks="" size="10" type="int4"/>
+         <column autoUpdated="false" digits="0" id="3" name="isduplicate" nullable="true" remarks="" size="10" type="int4"/>
+      </table>
+      <table name="recorder" numRows="43" remarks="Details for recorders of assessments." schema="srdb" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="firstname" nullable="true" remarks="" size="50" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="1" name="lastname" nullable="true" remarks="" size="50" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="2" name="email" nullable="true" remarks="" size="50" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="3" name="institution" nullable="true" remarks="" size="100" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="4" name="address" nullable="true" remarks="" size="1000" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="5" name="phonenumber" nullable="true" remarks="" size="50" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="6" name="notes" nullable="true" remarks="" size="1000" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="7" name="nameinxls" nullable="false" remarks="" size="50" type="varchar">
+            <child column="recorder" foreignKey="assessment_recorder_fkey" implied="false" onDeleteCascade="false" table="assessment"/>
+         </column>
+         <primaryKey column="nameinxls" sequenceNumberInPK="1"/>
+         <index name="recorder_pkey" unique="true">
+            <column ascending="true" name="nameinxls"/>
+         </index>
+      </table>
+      <table name="reference_point_units_view" numRows="333" remarks="" schema="srdb" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="assessid" nullable="true" remarks="" size="200" type="varchar">
+            <parent column="assessid" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" table="assessment"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="common" nullable="true" remarks="" size="200" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="2" name="area" nullable="true" remarks="" size="100" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="3" name="points_available" nullable="true" remarks="" size="19" type="int8"/>
+         <column autoUpdated="false" digits="0" id="4" name="bmsy_unit" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="5" name="ssbmsy_unit" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="6" name="blim_unit" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="7" name="ssblim_unit" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="8" name="ssbpa_unit" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="9" name="ssbtarget_unit" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="10" name="umsy_unit" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="11" name="fmsy_unit" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="12" name="flim_unit" nullable="true" remarks="" size="2147483647" type="text"/>
+      </table>
+      <table name="reference_point_values_view" numRows="333" remarks="This is a view that organises the reference points into separate columns. Contains only the most recent stocks as identified in srdb.mostrecent" schema="srdb" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="assessid" nullable="true" remarks="" size="200" type="varchar">
+            <parent column="assessid" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" table="assessment"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="common" nullable="true" remarks="" size="200" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="2" name="area" nullable="true" remarks="" size="100" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="3" name="points_available" nullable="true" remarks="" size="19" type="int8"/>
+         <column autoUpdated="false" digits="0" id="4" name="bmsy" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="5" name="ssbmsy" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="6" name="blim" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="7" name="ssblim" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="8" name="ssbpa" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="9" name="ssbtarget" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="10" name="umsy" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="11" name="fmsy" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="12" name="flim" nullable="true" remarks="" size="2147483647" type="text"/>
+      </table>
+      <table name="referencedoc" numRows="3693" remarks="RIS fields containing the reference document for an assessment." schema="srdb" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="assessid" nullable="true" remarks="" size="200" type="varchar">
+            <parent column="assessid" foreignKey="referencedoc_assessid_fkey" implied="false" onDeleteCascade="false" table="assessment"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="risfield" nullable="true" remarks="" size="50" type="varchar">
+            <parent column="risfield" foreignKey="referencedoc_risfield_fkey" implied="false" onDeleteCascade="false" table="risfields"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="2" name="risentry" nullable="true" remarks="" size="300" type="varchar"/>
+      </table>
+      <table name="risfields" numRows="33" remarks="Name of RIS fields." schema="srdb" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="risfield" nullable="false" remarks="" size="50" type="varchar">
+            <child column="risfield" foreignKey="referencedoc_risfield_fkey" implied="false" onDeleteCascade="false" table="referencedoc"/>
+            <child column="risfield" foreignKey="risfieldvalues_risfield_fkey" implied="false" onDeleteCascade="false" table="risfieldvalues"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="risdescription" nullable="true" remarks="" size="200" type="varchar"/>
+         <primaryKey column="risfield" sequenceNumberInPK="1"/>
+         <index name="risfields_pkey" unique="true">
+            <column ascending="true" name="risfield"/>
+         </index>
+      </table>
+      <table name="risfieldvalues" numRows="12" remarks="Allowed RIS field values." schema="srdb" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="risfield" nullable="true" remarks="" size="50" type="varchar">
+            <parent column="risfield" foreignKey="risfieldvalues_risfield_fkey" implied="false" onDeleteCascade="false" table="risfields"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="allowedvalueshort" nullable="true" remarks="" size="10" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="2" name="allowedvaluelong" nullable="true" remarks="" size="200" type="varchar"/>
+      </table>
+      <table name="stock" numRows="424" remarks="A stock consists of a species (field &quot;tsn&quot; from srdb.taxonomy), an area (field &quot;areaid&quot; from srdb.area). This table also keeps track of stocks that were in RAM's original database and the name used there if it is different from the stockid defined in the RAM Legacy database" schema="srdb" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="stockid" nullable="false" remarks="" size="40" type="varchar">
+            <child column="stockid" foreignKey="assessment_stockid_fkey" implied="false" onDeleteCascade="false" table="assessment"/>
+            <child column="stockid" foreignKey="lmetostocks_stockid_fkey" implied="false" onDeleteCascade="false" table="lmetostocks"/>
+            <child column="stockid" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" table="mostrecent"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="tsn" nullable="true" remarks="" size="10" type="int4">
+            <parent column="tsn" foreignKey="stock_tsn_fkey" implied="false" onDeleteCascade="false" table="taxonomy"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="2" name="scientificname" nullable="true" remarks="" size="200" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="3" name="commonname" nullable="true" remarks="" size="200" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="4" name="areaid" nullable="true" remarks="" size="70" type="varchar">
+            <parent column="areaid" foreignKey="stock_areaid_fkey" implied="false" onDeleteCascade="false" table="area"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="5" name="stocklong" nullable="true" remarks="" size="200" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="6" name="inmyersdb" nullable="true" remarks="" size="10" type="int4"/>
+         <column autoUpdated="false" digits="0" id="7" name="myersstockid" nullable="true" remarks="" size="40" type="varchar"/>
+         <primaryKey column="stockid" sequenceNumberInPK="1"/>
+         <index name="stock_pkey" unique="true">
+            <column ascending="true" name="stockid"/>
+         </index>
+      </table>
+      <table name="taxonomy" numRows="283" remarks="Taxonomic information obtained from the Integrated Taxonomic Information System (ITIS). Negative values for taxonomic serial number (TSN) are used in cases where a stock is of a species not present in ITIS." schema="srdb" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="tsn" nullable="false" remarks="" size="10" type="int4">
+            <child column="tsn" foreignKey="stock_tsn_fkey" implied="false" onDeleteCascade="false" table="stock"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="scientificname" nullable="true" remarks="" size="200" type="varchar">
+            <child column="scientificname" foreignKey="fishbasesaupcodes_scientificname_fkey" implied="false" onDeleteCascade="false" table="fishbasesaupcodes"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="2" name="kingdom" nullable="true" remarks="" size="200" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="3" name="phylum" nullable="true" remarks="" size="200" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="4" name="classname" nullable="true" remarks="" size="200" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="5" name="ordername" nullable="true" remarks="" size="200" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="6" name="family" nullable="true" remarks="" size="200" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="7" name="genus" nullable="true" remarks="" size="200" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="8" name="species" nullable="true" remarks="" size="200" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="9" name="myersname" nullable="true" remarks="" size="20" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="10" name="commonname1" nullable="true" remarks="" size="200" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="11" name="commonname2" nullable="true" remarks="" size="200" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="12" name="myersscientificname" nullable="true" remarks="" size="200" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="13" name="myersfamily" nullable="true" remarks="" size="50" type="varchar"/>
+         <primaryKey column="tsn" sequenceNumberInPK="1"/>
+         <index name="taxonomy_pkey" unique="true">
+            <column ascending="true" name="tsn"/>
+         </index>
+         <index name="scientificname_id" unique="true">
+            <column ascending="true" name="scientificname"/>
+         </index>
+      </table>
+      <table name="timeseries" numRows="82334" remarks="Values of timeseries" schema="srdb" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="assessid" nullable="true" remarks="" size="200" type="varchar">
+            <parent column="assessid" foreignKey="timeseries_assessid_fkey" implied="false" onDeleteCascade="false" table="assessment"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="tsid" nullable="true" remarks="" size="40" type="varchar">
+            <parent column="tsunique" foreignKey="timeseries_tsid_fkey" implied="false" onDeleteCascade="false" table="tsmetrics"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="2" name="tsyear" nullable="true" remarks="" size="10" type="int4"/>
+         <column autoUpdated="false" digits="17" id="3" name="tsvalue" nullable="true" remarks="" size="17" type="float8"/>
+         <index name="ts_index_assessid" unique="false">
+            <column ascending="true" name="assessid"/>
+         </index>
+         <index name="ts_index_year" unique="false">
+            <column ascending="true" name="tsyear"/>
+         </index>
+      </table>
+      <table name="timeseries_units_view" numRows="355" remarks="" schema="srdb" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="assessid" nullable="true" remarks="" size="200" type="varchar">
+            <parent column="assessid" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" table="assessment"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="count" nullable="true" remarks="" size="19" type="int8"/>
+         <column autoUpdated="false" digits="0" id="2" name="ssb_unit" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="3" name="r_unit" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="4" name="total_unit" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="5" name="f_unit" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="6" name="cpue_unit" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="7" name="catch_landings_unit" nullable="true" remarks="" size="2147483647" type="text"/>
+      </table>
+      <table name="timeseries_values_view" numRows="16308" remarks="This is a materialised view that organises the timeseries into separate columns." schema="srdb" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="assessid" nullable="true" remarks="" size="200" type="varchar">
+            <parent column="assessid" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" table="assessment"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="tsyear" nullable="true" remarks="" size="10" type="int4"/>
+         <column autoUpdated="false" digits="0" id="2" name="pt_avail" nullable="true" remarks="" size="19" type="int8"/>
+         <column autoUpdated="false" digits="17" id="3" name="ssb" nullable="true" remarks="" size="17" type="float8"/>
+         <column autoUpdated="false" digits="17" id="4" name="r" nullable="true" remarks="" size="17" type="float8"/>
+         <column autoUpdated="false" digits="17" id="5" name="total" nullable="true" remarks="" size="17" type="float8"/>
+         <column autoUpdated="false" digits="17" id="6" name="f" nullable="true" remarks="" size="17" type="float8"/>
+         <column autoUpdated="false" digits="17" id="7" name="cpue" nullable="true" remarks="" size="17" type="float8"/>
+         <column autoUpdated="false" digits="17" id="8" name="catch_landings" nullable="true" remarks="" size="17" type="float8"/>
+      </table>
+      <table name="tsmetrics" numRows="151" remarks="Definition of tiemseries such as recruits, spawning stock biomass, total abundance, etc." schema="srdb" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="tscategory" nullable="true" remarks="" size="200" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="1" name="tsshort" nullable="true" remarks="" size="40" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="2" name="tslong" nullable="true" remarks="" size="200" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="3" name="tsunitsshort" nullable="true" remarks="" size="40" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="4" name="tsunitslong" nullable="true" remarks="" size="300" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="5" name="tsunique" nullable="false" remarks="" size="70" type="varchar">
+            <child column="tsid" foreignKey="brptots_tsid_fkey" implied="false" onDeleteCascade="false" table="brptots"/>
+            <child column="tsid" foreignKey="timeseries_tsid_fkey" implied="false" onDeleteCascade="false" table="timeseries"/>
+         </column>
+         <primaryKey column="tsunique" sequenceNumberInPK="1"/>
+         <index name="tsmetrics_pkey" unique="true">
+            <column ascending="true" name="tsunique"/>
+         </index>
+      </table>
+      <table name="tsrelative_explicit_view" numRows="28977" remarks="" schema="srdb" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="assessid" nullable="true" remarks="" size="200" type="varchar">
+            <parent column="assessid" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" table="assessment"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="tsyear" nullable="true" remarks="" size="10" type="int4"/>
+         <column autoUpdated="false" digits="0" id="2" name="tsid" nullable="true" remarks="" size="40" type="varchar"/>
+         <column autoUpdated="false" digits="17" id="3" name="tsvalue" nullable="true" remarks="" size="17" type="float8"/>
+         <column autoUpdated="false" digits="0" id="4" name="bioid" nullable="true" remarks="" size="40" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="5" name="biovalue" nullable="true" remarks="" size="200" type="varchar"/>
+         <column autoUpdated="false" digits="17" id="6" name="tstobrpratio" nullable="true" remarks="" size="17" type="float8"/>
+      </table>
+   </tables>
+</database>

@@ -1,0 +1,33 @@
+// dot 2.28.0 on Mac OS X 10.6.8
+// SchemaSpy rev 590
+digraph "mostrecent" {
+  graph [
+    rankdir="RL"
+    bgcolor="#f7f7f7"
+    nodesep="0.18"
+    ranksep="0.46"
+    fontname="Helvetica"
+    fontsize="11"
+  ];
+  node [
+    fontname="Helvetica"
+    fontsize="11"
+    shape="plaintext"
+  ];
+  edge [
+    arrowsize="0.8"
+  ];
+  "mostrecent" [
+    label=<
+    <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" BGCOLOR="#ffffff">
+      <TR><TD COLSPAN="3" BGCOLOR="#9bab96" ALIGN="CENTER">mostrecent</TD></TR>
+      <TR><TD PORT="stockid" COLSPAN="3" ALIGN="LEFT">stockid</TD></TR>
+      <TR><TD PORT="assessid" COLSPAN="3" ALIGN="LEFT">assessid</TD></TR>
+      <TR><TD PORT="ismostrecent" COLSPAN="3" ALIGN="LEFT">ismostrecent</TD></TR>
+      <TR><TD PORT="isduplicate" COLSPAN="3" ALIGN="LEFT">isduplicate</TD></TR>
+      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">  </TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">360 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">  </TD></TR>
+    </TABLE>>
+    URL="tables/mostrecent.html"
+    tooltip="mostrecent"
+  ];
+}

@@ -1,0 +1,42 @@
+// dot 2.28.0 on Mac OS X 10.6.8
+// SchemaSpy rev 590
+digraph "reference_point_values_view" {
+  graph [
+    rankdir="RL"
+    bgcolor="#f7f7f7"
+    nodesep="0.18"
+    ranksep="0.46"
+    fontname="Helvetica"
+    fontsize="11"
+  ];
+  node [
+    fontname="Helvetica"
+    fontsize="11"
+    shape="plaintext"
+  ];
+  edge [
+    arrowsize="0.8"
+  ];
+  "reference_point_values_view" [
+    label=<
+    <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" BGCOLOR="#ffffff">
+      <TR><TD COLSPAN="3" BGCOLOR="#9bab96" ALIGN="CENTER">reference_point_values_view</TD></TR>
+      <TR><TD PORT="assessid" COLSPAN="3" ALIGN="LEFT">assessid</TD></TR>
+      <TR><TD PORT="common" COLSPAN="3" ALIGN="LEFT">common</TD></TR>
+      <TR><TD PORT="area" COLSPAN="3" ALIGN="LEFT">area</TD></TR>
+      <TR><TD PORT="points_available" COLSPAN="3" ALIGN="LEFT">points_available</TD></TR>
+      <TR><TD PORT="bmsy" COLSPAN="3" ALIGN="LEFT">bmsy</TD></TR>
+      <TR><TD PORT="ssbmsy" COLSPAN="3" ALIGN="LEFT">ssbmsy</TD></TR>
+      <TR><TD PORT="blim" COLSPAN="3" ALIGN="LEFT">blim</TD></TR>
+      <TR><TD PORT="ssblim" COLSPAN="3" ALIGN="LEFT">ssblim</TD></TR>
+      <TR><TD PORT="ssbpa" COLSPAN="3" ALIGN="LEFT">ssbpa</TD></TR>
+      <TR><TD PORT="ssbtarget" COLSPAN="3" ALIGN="LEFT">ssbtarget</TD></TR>
+      <TR><TD PORT="umsy" COLSPAN="3" ALIGN="LEFT">umsy</TD></TR>
+      <TR><TD PORT="fmsy" COLSPAN="3" ALIGN="LEFT">fmsy</TD></TR>
+      <TR><TD PORT="flim" COLSPAN="3" ALIGN="LEFT">flim</TD></TR>
+      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">  </TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">333 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">  </TD></TR>
+    </TABLE>>
+    URL="tables/reference_point_values_view.html"
+    tooltip="reference_point_values_view"
+  ];
+}
