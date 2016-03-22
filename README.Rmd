@@ -1,0 +1,32 @@
+---
+output:
+md_document:
+    variant: markdown_github
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, echo = FALSE}
+knitr::opts <- chunk$set(
+		       collapse = TRUE,
+		         comment = "#>",
+		         fig.path = "README-"
+			 )
+```
+
+# Connecting to RAM Legacy
+
+Some code demonstrating a connection to RAM Legacy.
+
+For generic example of using postgreSQL in R, see
+[use-PostgreSQL](https://github.com/ashander/use-PostgreSQL).
+
+To understand the db, open [the schema](https://ashander.github.io/RAMlegacyr/inst/RAMschema/).
+(The schema was produced using SchemaSpy: http://schemaspy.sourceforge.net/)
+
+## Citation
+
+```{r}
+library(RAMlegacyr)
+citation('RAMlegacyr')
+```
